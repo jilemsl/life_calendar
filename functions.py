@@ -161,3 +161,46 @@ def plot_calendar_heatmap(profile, time_period=None, time_frame='daily'):
     period_str = f"{time_period[0]} → {time_period[1]}" if time_period else "all time"
     plt.title(f"{profile}'s daily scores ({time_frame} | {period_str})", fontsize=20)
     plt.show()
+
+
+
+
+def plot_time_series(profile, var_list, freq = 'daily', time_period=None):
+    """
+    Plots a time series of chosen variables.
+    
+    Args:
+        profile: username string
+        var_list: list of variable names to plot
+        freq: frequency of resampling ('daily', 'weekly', 'monthly', 'annually')
+        time_period: tuple of two pd.Timestamp (start, end), or None for all
+    """
+
+    df = pd.read_csv(rf'data/{profile}_profile.csv', parse_dates=['date'])
+    df.set_index('date', inplace=True)
+    for var in var_list:
+        df[var] = df[var].fillna(0)
+
+    # Filter by time period
+    if time_period is not None:
+        start, end = time_period
+        df = df.loc[start:end]
+
+    # Resample by frequency
+    if freq != 'daily':
+        df = df.resample(freq).mean()
+
+    plt.figure(figsize=(15, 5))
+
+    for var in var_list :
+        
+        plt.plot(df.index, df[var], marker='o', linestyle='-', label=var)
+        plt.xlabel("Date")
+
+    plt.title(f"{profile}'s {var_list} over time", fontsize=20)
+    plt.legend()
+    plt.grid()
+
+    plt.show()
+
+
