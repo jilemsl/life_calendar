@@ -2,34 +2,35 @@
 
 A local app to track daily activities, write a diary, and visualize your life over time.
 
-## How to run
+## Requirements
 
-(python is mandatory)
-open powershell (win+X -> powershell/terminal)
+- Python 3.9 or later — download from https://python.org
 
-if git is installed : 
-type git clone https://github.com/jilemsl/life_calendar
-then type cd C:\Users\yourname\life_calendar
+## First launch
 
-if git isn't installed : 
-click the 'code' button on the browser github page of the project. download the .zip and extract it 
-then type cd C:\Users\yourname\Downloads\life_calendar
+**Windows** — double-click `run.bat`.  
+It installs all dependencies and starts the app. The browser opens automatically.
 
-then type (always in powershell) : 
-
+**Mac / Linux** — open a terminal in the project folder and run:
 ```
 pip install -r requirements.txt
 streamlit run app.py
 ```
 
-Then open http://localhost:8501 in your browser.
+If you downloaded a zip from GitHub instead of using git, extract it first, then open a terminal inside the extracted folder.
 
-To re open the app : open powershell (win+X) , cd C:\... (the path to life calendar), streamlit run app.py (no need to re install requirements)
+## Subsequent launches
+
+**Windows** — double-click `open.pyw`.  
+No console window, no reinstall. It starts the server and opens your browser.
+
+**Mac / Linux** — run `./open.sh` in the project folder (first time: `chmod +x open.sh`).
 
 ## Features
 
 - **Dashboard** — calendar heatmap (red → green), streak, stats, recent entries
 - **Add Entry** — log activity scores (−10 to 10), durations, and a diary note per day
+- **Review** — browse past days with scores and diary, pick a date or hit Random
 - **Charts** — interactive time series for daily score and individual activities
 - **Arcs** — name periods of your life (e.g. "Exam season", "Summer 2026") and see them overlaid on charts
 - **Settings** — add/remove tracked activities, export your profile as a zip to share with friends, import a friend's profile
